@@ -1,0 +1,10 @@
+name: keepalive
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS -m 60 https://nexora-english-web.onrender.com/health || true
