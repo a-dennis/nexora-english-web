@@ -77,6 +77,7 @@ footer a{color:var(--p)}
 </style></head><body>
 <header><div class="hw"><a class="logo" href="#/">Nexora English<small id="sub">AI teacher - ಕನ್ನಡ + English</small></a>
 <div class="chips"><span class="chip" id="xp">0 XP</span><span class="chip" id="st">0 day</span></div></div></header>
+<div id="snd" style="display:none;background:#fef3c7;color:#78350f;padding:10px 16px;font-size:14px"><b>🔇 No sound?</b> Turn up the Media volume and tap <button class="btn sm" onclick="testSound()">🔊 Test sound</button>. If still silent: Android Settings &gt; search "Text-to-speech" &gt; choose Google, install voice data. You can still read and play without sound.</div>
 <main id="app"></main>
 <footer>
 <p><b>More from Nexora:</b> <a href="https://nexora-web-q7rn.onrender.com" target="_blank" rel="noopener">Nexora - documents and PDF tools</a> | <a href="https://nexora-markets-web.onrender.com" target="_blank" rel="noopener">Nexora Markets</a></p>
@@ -122,16 +123,34 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const norm=s=>s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
 const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
 /* speech */
-let voices=[];function lv(){voices=speechSynthesis?speechSynthesis.getVoices():[]}
-if('speechSynthesis' in window){lv();speechSynthesis.onvoiceschanged=lv}
-function pickVoice(p){const en=voices.filter(v=>/^en/i.test(v.lang));if(!en.length)return null;
+let voices=[];function lv(){try{voices=speechSynthesis.getVoices()||[]}catch(e){voices=[]}}
+if('speechSynthesis' in window){lv();speechSynthesis.onvoiceschanged=lv;setTimeout(lv,500);setTimeout(lv,1500)}
+function pickVoice(p){lv();const en=voices.filter(v=>/^en/i.test(v.lang));if(!en.length)return null;
  const inn=en.filter(v=>/en[-_]IN/i.test(v.lang));const pool=inn.length?inn:en;
- const fem=/female|heera|zira|samantha|aria|jenny|susan|karen|veena|priya|neerja|google.*(uk english female|us english)/i,mal=/\bmale\b|ravi|david|daniel|mark|guy|prabhat|rishi|george/i;
+ const fem=/female|heera|zira|samantha|aria|jenny|susan|karen|veena|priya|neerja/i,mal=/\bmale\b|ravi|david|daniel|mark|guy|prabhat|rishi|george/i;
  const want=p==='Anaya'?fem:mal;return pool.find(v=>want.test(v.name)&&!(p==='Arjun'&&/female/i.test(v.name)))||pool[0]}
-function speak(t,slow,done){if(!('speechSynthesis' in window)){done&&done();return}
- speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-IN';const v=pickVoice(S.p);if(v){u.voice=v;u.lang=v.lang}
- u.rate=slow?0.7:0.9;u.pitch=S.p==='Anaya'?1.15:0.8;const av=$('.av');if(av)av.classList.add('talk');
- u.onend=u.onerror=()=>{const a=$('.av');if(a)a.classList.remove('talk');done&&done()};speechSynthesis.speak(u)}
+function noSound(){const m=$('#snd');if(m)m.style.display='block'}
+function soundOK(){const m=$('#snd');if(m)m.style.display='none';S.snd=1}
+function unlock(){if(S._u||!('speechSynthesis' in window))return;S._u=1;try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u)}catch(e){}}
+['pointerdown','touchend','click','keydown'].forEach(ev=>addEventListener(ev,unlock,{passive:true}));
+function speak(t,slow,done){if(!('speechSynthesis' in window)){noSound();done&&done();return}
+ const go=()=>{try{speechSynthesis.resume()}catch(e){}
+  const u=new SpeechSynthesisUtterance(t);const v=pickVoice(S.p);if(v){u.voice=v;u.lang=v.lang}else u.lang='en-IN';
+  u.rate=slow?0.7:0.9;u.pitch=S.p==='Anaya'?1.15:0.8;u.volume=1;
+  const av=$('.av');if(av)av.classList.add('talk');let st=false;
+  const w=setTimeout(()=>{if(!st)noSound()},3000);
+  u.onstart=()=>{st=true;clearTimeout(w);soundOK()};
+  u.onend=()=>{clearTimeout(w);const a=$('.av');if(a)a.classList.remove('talk');done&&done()};
+  u.onerror=e=>{clearTimeout(w);const a=$('.av');if(a)a.classList.remove('talk');if(!e||(e.error!=='canceled'&&e.error!=='interrupted'))noSound();done&&done()};
+  speechSynthesis.speak(u)};
+ if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();setTimeout(go,120)}else go()}
+function speakL(text,lang,done){const code=lang==='hi'?'hi':'kn';lv();const v=voices.find(x=>x.lang.toLowerCase().replace('_','-').startsWith(code));
+ if(v){const go=()=>{const u=new SpeechSynthesisUtterance(text);u.voice=v;u.lang=v.lang;u.rate=.85;u.onend=u.onerror=()=>done&&done();speechSynthesis.speak(u)};
+  if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();setTimeout(go,120)}else go();return}
+ try{const au=new Audio('/api/tts?lang='+code+'&text='+encodeURIComponent(text.slice(0,200)));au.onended=()=>done&&done();au.onerror=()=>{pop('Voice for this language is not available now');done&&done()};au.play().catch(()=>{pop('Tap again to hear');})}catch(e){}}
+function greet(){unlock();const en=S.p==='Anaya'?'Hi! I am Anaya, your teacher. Pick a lesson and I will help you.':'Hi! I am Arjun, your teacher. Pick a lesson and I will help you.';
+ speak(en,false,()=>speakL(S.lang==='hi'?GREET_HI:GREET_KN,S.lang))}
+function testSound(){unlock();speak('Hello! Can you hear me?',false)}
 function listen(target,cb){const R=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!R){cb(null);return}const r=new R();r.lang='en-IN';r.interimResults=false;r.maxAlternatives=3;
  r.onresult=e=>{const alts=[...e.results[0]].map(a=>a.transcript);cb(alts)};r.onerror=()=>cb([]);r.onend=()=>{};
@@ -156,6 +175,7 @@ function svgChar(p,mood){const girl=p==='Anaya';mood=mood||'n';
 const BADGES=[["🚀","First lesson",()=>Object.keys(S.done).length>=1],["🔥","3-day streak",()=>streak()>=3],["⭐","100 XP",()=>S.xp>=100],["🏆","5 lessons",()=>Object.keys(S.done).length>=5],["💎","500 XP",()=>S.xp>=500]];
 function pop(t){const d=document.createElement('div');d.className='pop';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2700)}
 function checkBadges(){S.b=S.b||{};BADGES.forEach(b=>{if(!S.b[b[1]]&&b[2]()){S.b[b[1]]=1;pop(b[0]+' New badge: '+b[1])}});localStorage.setItem('ne',JSON.stringify(S))}
+const GREET_KN="ನಮಸ್ಕಾರ! ಇಂಗ್ಲಿಷ್ ಕಲಿಯೋಣ.",GREET_HI="नमस्ते! चलिए अंग्रेज़ी सीखें।";
 const avatar=()=>S.p==='Anaya'?'👩‍🏫':'👨‍🏫';
 function react(mood,msg,say){const b=$('#tb');if(b){b.innerHTML=tutorBox(msg,mood)}speak(say||msg.replace(/<[^>]+>/g,''),false,()=>{const b2=$('#tb');if(b2)b2.innerHTML=tutorBox(msg,'n')})}
 const GOOD=["Great job!","Super!","Perfect!","Well done!","Excellent!","You are doing great!"],BAD=["Nice try!","Almost there!","Do not worry, try again!","Good effort!"];
@@ -174,6 +194,7 @@ function home(){
  if(!S.g)return welcome();
   let h=`<div class="hero"><div><h1>Learn English with ${S.p}</h1><p>ಇಂಗ್ಲಿಷ್ ಕಲಿಯಿರಿ - listen, speak, play. A to Z, step by step.</p><a class="btn sm" href="#/lesson/1/0">Start now ›</a></div>
  <div class="chars"><div class="${S.p==='Anaya'?'sel':''}" onclick="pick('Anaya')">${svgChar('Anaya')}</div><div class="${S.p==='Arjun'?'sel':''}" onclick="pick('Arjun')">${svgChar('Arjun')}</div></div></div>`;
+ h+=`<div style="text-align:center;margin-bottom:10px"><button class="btn" onclick="greet()">🔊 Tap to hear your teacher</button> <button class="btn sm alt" onclick="testSound()">Test sound</button></div>`;
  h+=tutorBox(S.p==='Anaya'?`Hi! I am Anaya, your English teacher. Pick a lesson and I will help you. Small steps every day! 😊`:`Hi! I am Arjun, your English teacher. Let us start. Small steps every day! 💪`);
  h+=`<div class="card"><b>Your rewards</b><div class="goal">Today: ${S.days.includes(today())?'✅ lesson done':'⬜ finish 1 lesson'} | 🔥 ${streak()} day streak | ⭐ ${S.xp} XP</div><div>${BADGES.map(b=>`<span class="bdg ${(S.b||{})[b[1]]?'':'off'}">${b[0]} ${b[1]}</span>`).join('')}</div>
  <div class="row" style="margin-top:10px"><span class="note">Tap a teacher above to switch.</span><a class="btn sm" style="background:linear-gradient(120deg,#f59e0b,#ef4444)" href="#/kids">🧒 Kids Zone</a><a class="btn sm alt" href="#/ask">💬 Ask teacher</a><button class="btn sm alt" onclick="setL(S.lang==='kn'?'hi':'kn')">🌐 ${S.lang==='kn'?'हिन्दी':'ಕನ್ನಡ'}</button></div>
@@ -191,10 +212,10 @@ function lesson(l,i){const x=LEVELS[l-1].lessons[i];let k=0;
   $('#app').innerHTML=`<div class="prog"><i style="width:${100*k/x.items.length}%"></i></div>`+
   tutorBox(k==0?`Lesson: <b>${x.t}</b>. Listen first, then say it out loud.`:`Good! Next one.`)+
   `<div class="card"><div class="big">${esc(it.en)}</div><div class="kn">${tr(it)}</div><div class="say">${it.say!==it.en?esc(it.say):''}</div>
-  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn sm" id="b1">🔊 Listen ${T('listen')}</button><button class="btn sm alt" id="b2">🐢 Slow</button><button class="btn sm alt" id="b3">🎤 Speak ${T('speak')}</button></div>
+  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn sm" id="b1">🔊 Listen ${T('listen')}</button><button class="btn sm alt" id="b2">🐢 Slow</button><button class="btn sm alt" id="b4">🔊 ${T('lang')}</button><button class="btn sm alt" id="b3">🎤 Speak ${T('speak')}</button></div>
   <div class="fb" id="fb" style="text-align:center"></div></div>
   <div class="row"><button class="btn alt" id="pv" ${k?'':'disabled'}>‹ Back</button><button class="btn" id="nx">${k==x.items.length-1?'Start quiz ›':'Next '+T('next')+' ›'}</button></div>`;
-  $('#b1').onclick=()=>speak(it.say);$('#b2').onclick=()=>speak(it.say,true);
+  $('#b4').onclick=()=>speakL(tr(it),S.lang);$('#b1').onclick=()=>speak(it.say);setTimeout(()=>speak(k==0?'Lesson. '+x.t+'. Listen and repeat after me. '+it.say:it.say),250);$('#b2').onclick=()=>speak(it.say,true);
   $('#b3').onclick=()=>{const f=$('#fb');f.className='fb';f.textContent='Listening... speak now';
    listen(it.say,a=>{if(a===null){f.textContent='Speaking check needs Chrome. Say it out loud anyway - you can do it!';return}
     if(!a.length){f.className='fb bad';f.textContent='I could not hear you. Try again.';return}
