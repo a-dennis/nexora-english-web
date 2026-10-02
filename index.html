@@ -204,10 +204,11 @@ function lesson(l,i){const x=LEVELS[l-1].lessons[i];let k=0;
   $('#pv').onclick=()=>{k--;card()};$('#nx').onclick=()=>{if(k<x.items.length-1){k++;card()}else quiz(l,i)}}
  card()}
 function quiz(l,i){const x=LEVELS[l-1].lessons[i];const all=[].concat(...LEVELS.flatMap(v=>v.lessons.map(z=>z.items)));
+ const near=(it,key,arr)=>arr.filter(z=>key(z)!==key(it)).sort((a,b)=>Math.abs(key(a).length-key(it).length)-Math.abs(key(b).length-key(it).length)||Math.random()-.5);
  const items=shuf(x.items).slice(0,Math.min(8,x.items.length));const qs=[];
  items.forEach((it,n)=>{const t=n%4;
-  if(t===0){const o=shuf(x.items.filter(z=>tr(z)!==tr(it)).concat(all.filter(z=>tr(z)!==tr(it)))).filter((z,j,a)=>a.findIndex(y=>tr(y)===tr(z))===j).slice(0,3).map(z=>tr(z));qs.push({q:`What does <b>${esc(it.en)}</b> mean in ${S.lang==='hi'?'Hindi':'Kannada'}?`,o:shuf(o.concat(tr(it))),a:tr(it),listen:it.say})}
-  else if(t===1){const o=shuf(x.items.filter(z=>z.en!==it.en).concat(all.filter(z=>z.en!==it.en))).filter((z,j,a)=>a.findIndex(y=>y.en===z.en)===j).slice(0,3).map(z=>z.en);qs.push({q:`Which English is <b>${tr(it)}</b>?`,o:shuf(o.concat(it.en)),a:it.en})}
+  if(t===0){const o=near(it,tr,x.items.concat(all)).filter((z,j,a)=>a.findIndex(y=>tr(y)===tr(z))===j).slice(0,3).map(z=>tr(z));qs.push({q:`What does <b>${esc(it.en)}</b> mean in ${S.lang==='hi'?'Hindi':'Kannada'}?`,o:shuf(o.concat(tr(it))),a:tr(it),listen:it.say})}
+  else if(t===1){const o=near(it,z=>z.en,x.items.concat(all)).filter((z,j,a)=>a.findIndex(y=>y.en===z.en)===j).slice(0,3).map(z=>z.en);qs.push({q:`Which English is <b>${tr(it)}</b>?`,o:shuf(o.concat(it.en)),a:it.en})}
   else if(t===3)qs.push({q:`Say it out loud: <b>${esc(it.en)}</b>`,say:1,a:it.en,listen:it.say});
   else qs.push({q:`Type in English: <b>${tr(it)}</b>`,type:1,a:it.en,hint:it.en.split(' ').map(w=>w[0]+'_'.repeat(Math.max(0,w.length-1))).join(' ')})});
  let k=0,ok=0;
