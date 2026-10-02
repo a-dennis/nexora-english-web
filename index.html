@@ -65,13 +65,22 @@ footer a{color:var(--p)}
 .bdg.off{filter:grayscale(1);opacity:.45}
 .pop{position:fixed;left:50%;top:70px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 16px;border-radius:12px;z-index:9;font-weight:700;animation:pp 2.6s forwards}
 @keyframes pp{0%{opacity:0;top:50px}10%,80%{opacity:1;top:70px}100%{opacity:0}}
+
+.kt{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kt button{border:0;border-radius:20px;padding:12px 4px;font-family:inherit;cursor:pointer;color:#fff;font-weight:800;font-size:15px;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+.kt button:active{transform:translateY(3px);box-shadow:none}
+.kt .e{font-size:42px;display:block;line-height:1.1}
+.kt .l{font-size:22px;display:block}
+.kg{background:linear-gradient(135deg,#fde68a,#fbcfe8);border-radius:22px;padding:14px;margin-bottom:12px}
+.kb{display:inline-block;margin:4px;padding:10px 16px;border-radius:99px;border:0;font-size:16px;font-weight:800;color:#fff;font-family:inherit;cursor:pointer}
+.kbig{font-size:84px;text-align:center}
 </style></head><body>
-<header><div class="hw"><a class="logo" href="#/">Nexora English<small>AI teacher - ಕನ್ನಡ + English</small></a>
+<header><div class="hw"><a class="logo" href="#/">Nexora English<small id="sub">AI teacher - ಕನ್ನಡ + English</small></a>
 <div class="chips"><span class="chip" id="xp">0 XP</span><span class="chip" id="st">0 day</span></div></div></header>
 <main id="app"></main>
 <footer>
 <p><b>More from Nexora:</b> <a href="https://nexora-web-q7rn.onrender.com" target="_blank" rel="noopener">Nexora - documents and PDF tools</a> | <a href="https://nexora-markets-web.onrender.com" target="_blank" rel="noopener">Nexora Markets</a></p>
-<p>Free to start. Kannada help is for learning only - please tell us if you see a mistake. Built with Instinct.</p>
+<p>Free to start. Kannada and Hindi help is for learning only - please tell us if you see a mistake. Built with Instinct.</p>
 </footer>
 <script>
 const $=s=>document.querySelector(s);
@@ -97,12 +106,18 @@ const LEVELS=[
 {id:3,name:"Level 3 - Intermediate",kn:"ಹಂತ 3 - ಮಧ್ಯಮ",soon:"Past and future tense, office English, phone calls",lessons:[]},
 {id:4,name:"Level 4 - Advanced",kn:"ಹಂತ 4 - ಮುಂದುವರಿದ",soon:"Interview English, writing emails, long talks",lessons:[]}
 ];
-const S=JSON.parse(localStorage.getItem('ne')||'{}');S.xp=S.xp||0;S.done=S.done||{};S.days=S.days||[];S.p=S.p||'Anaya';
+const HI={"Apple": "सेब", "Ball": "गेंद", "Cat": "बिल्ली", "Dog": "कुत्ता", "Elephant": "हाथी", "Fish": "मछली", "Goat": "बकरी", "Hand": "हाथ", "Ink": "स्याही", "Jug": "जग", "King": "राजा", "Lion": "शेर", "Mango": "आम", "Nose": "नाक", "Orange": "संतरा", "Parrot": "तोता", "Queen": "रानी", "Rabbit": "खरगोश", "Sun": "सूरज", "Tiger": "बाघ", "Umbrella": "छाता", "Van": "वैन", "Water": "पानी", "Yellow": "पीला", "Zebra": "ज़ेबरा", "Hello": "नमस्ते", "Good morning": "सुप्रभात", "Good night": "शुभ रात्रि", "Thank you": "धन्यवाद", "Please": "कृपया", "Sorry": "माफ़ कीजिए", "Yes": "हाँ", "No": "नहीं", "Welcome": "स्वागत है", "How are you?": "आप कैसे हैं?", "I am fine.": "मैं ठीक हूँ।", "My name is Ravi.": "मेरा नाम रवि है।", "Nice to meet you.": "आपसे मिलकर खुशी हुई।", "I am a student.": "मैं एक विद्यार्थी हूँ।", "Where are you from?": "आप कहाँ से हैं?", "I live in Bengaluru.": "मैं बेंगलुरु में रहता हूँ।", "One": "एक", "Two": "दो", "Three": "तीन", "Four": "चार", "Five": "पाँच", "Six": "छह", "Seven": "सात", "Eight": "आठ", "Nine": "नौ", "Ten": "दस", "Monday": "सोमवार", "Tuesday": "मंगलवार", "Wednesday": "बुधवार", "Thursday": "गुरुवार", "Friday": "शुक्रवार", "Saturday": "शनिवार", "Sunday": "रविवार", "Mother": "माँ", "Father": "पिता", "Brother": "भाई", "Sister": "बहन", "Friend": "दोस्त", "Teacher": "शिक्षक", "Child": "बच्चा", "House": "घर", "Book": "किताब", "Food": "खाना", "School": "स्कूल", "Office": "दफ़्तर", "Work": "काम", "Money": "पैसा", "Phone": "फ़ोन", "I am happy.": "मैं खुश हूँ।", "You are my friend.": "तुम मेरे दोस्त हो।", "He is a doctor.": "वह डॉक्टर है।", "She is a teacher.": "वह शिक्षिका है।", "We are at home.": "हम घर पर हैं।", "They are students.": "वे विद्यार्थी हैं।", "What is your name?": "आपका नाम क्या है?", "Where is the bus stand?": "बस स्टैंड कहाँ है?", "What is the time?": "क्या समय हुआ है?", "How much is this?": "यह कितने का है?", "Can you help me?": "क्या आप मेरी मदद कर सकते हैं?", "Do you understand?": "क्या आप समझे?", "I eat rice.": "मैं चावल खाता हूँ।", "I drink water.": "मैं पानी पीता हूँ।", "I go to office.": "मैं दफ़्तर जाता हूँ।", "I read a book.": "मैं किताब पढ़ता हूँ।", "I write a letter.": "मैं चिट्ठी लिखता हूँ।", "I speak English.": "मैं अंग्रेज़ी बोलता हूँ।", "I do not understand.": "मुझे समझ नहीं आया।", "Please speak slowly.": "कृपया धीरे बोलिए।", "Please say it again.": "कृपया फिर से कहिए।", "I want water.": "मुझे पानी चाहिए।", "I need help.": "मुझे मदद चाहिए।"};const HT=["अक्षर A से H", "अक्षर I से P", "अक्षर Q से Z", "अभिवादन", "मेरे बारे में", "संख्याएँ 1-10", "सप्ताह के दिन", "परिवार और दोस्त", "मेरे आसपास की चीज़ें", "आसान वाक्य", "काम के सवाल", "रोज़ के काम", "मदद माँगना"];
+LEVELS.forEach(v=>v.lessons.forEach(z=>z.items.forEach(it=>it.hi=HI[it.en])));
+let _n=0;LEVELS.forEach(v=>v.lessons.forEach(z=>{z.hi=HT[_n++]}));
+const LV_HI={1:'स्तर 1 - शुरुआत',2:'स्तर 2 - प्राथमिक',3:'स्तर 3 - मध्यम',4:'स्तर 4 - उन्नत'};
+const TT={kn:{listen:'ಕೇಳಿ',speak:'ಹೇಳಿ',next:'ಮುಂದೆ',check:'ಪರಿಶೀಲಿಸಿ',ok:'ಸರಿ',lang:'ಕನ್ನಡ'},hi:{listen:'सुनिए',speak:'बोलिए',next:'आगे',check:'जाँचें',ok:'सही',lang:'हिन्दी'}};
+const tr=it=>it[S.lang]||it.kn;const tl=x=>x[S.lang]||x.kn;const T=k=>TT[S.lang||'kn'][k];
+const S=JSON.parse(localStorage.getItem('ne')||'{}');S.xp=S.xp||0;S.done=S.done||{};S.days=S.days||[];S.p=S.p||'Anaya';S.lang=S.lang||'';
 function save(){localStorage.setItem('ne',JSON.stringify(S));hdr()}
 function today(){return new Date().toISOString().slice(0,10)}
 function touch(){const t=today();if(!S.days.includes(t))S.days.push(t);S.days=S.days.slice(-400);save()}
 function streak(){let n=0,d=new Date();while(S.days.includes(d.toISOString().slice(0,10))){n++;d.setDate(d.getDate()-1)}return n}
-function hdr(){$('#xp').textContent=S.xp+' XP';$('#st').textContent=streak()+' day'+(streak()==1?'':'s')}
+function hdr(){const sb=$('#sub');if(sb)sb.textContent='AI teacher - '+(S.lang==='hi'?'हिन्दी':'ಕನ್ನಡ')+' + English';$('#xp').textContent=S.xp+' XP';$('#st').textContent=streak()+' day'+(streak()==1?'':'s')}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm=s=>s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
 const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
@@ -145,22 +160,26 @@ const avatar=()=>S.p==='Anaya'?'👩‍🏫':'👨‍🏫';
 function tutorBox(msg){return `<div class="card tutor"><div class="av">${svgChar(S.p)}</div><div class="bubble"><b>${S.p}</b>: ${msg}</div></div>`}
 /* views */
 function setG(g){S.g=g;if(g==='girl')S.p='Arjun';else if(g==='boy')S.p='Anaya';save();home()}
+function setL(l){S.lang=l;save();home()}
+function chooseLang(){$('#app').innerHTML=`<div class="hero"><div><h1>Nexora English</h1><p>Choose your language to learn from.<br>ನಿಮ್ಮ ಭಾಷೆ ಆರಿಸಿ | अपनी भाषा चुनें</p></div><div class="chars"><div>${svgChar('Anaya')}</div><div>${svgChar('Arjun')}</div></div></div>
+ <div class="card"><div class="row"><button class="btn" style="flex:1" onclick="setL('kn')">ಕನ್ನಡ + English</button><button class="btn" style="flex:1" onclick="setL('hi')">हिन्दी + English</button></div><div class="note" style="margin-top:8px">You can change this later on the home page.</div></div>`}
 function welcome(){$('#app').innerHTML=`<div class="hero"><div><h1>Welcome! ಸ್ವಾಗತ</h1><p>Two friendly teachers are ready to help you learn English.</p></div><div class="chars"><div>${svgChar('Anaya')}</div><div>${svgChar('Arjun')}</div></div></div>
  <div class="card"><b>I am a... (optional)</b><div class="note">We use this only to suggest your teacher. It stays on your phone. You can change the teacher any time.</div>
  <div class="row" style="margin-top:10px"><button class="btn" onclick="setG('girl')">Girl / Woman</button><button class="btn" onclick="setG('boy')">Boy / Man</button><button class="btn alt" onclick="setG('na')">Prefer not to say</button></div></div>`}
 function home(){
+ if(!S.lang)return chooseLang();
  if(!S.g)return welcome();
   let h=`<div class="hero"><div><h1>Learn English with ${S.p}</h1><p>ಇಂಗ್ಲಿಷ್ ಕಲಿಯಿರಿ - listen, speak, play. A to Z, step by step.</p><a class="btn sm" href="#/lesson/1/0">Start now ›</a></div>
  <div class="chars"><div class="${S.p==='Anaya'?'sel':''}" onclick="pick('Anaya')">${svgChar('Anaya')}</div><div class="${S.p==='Arjun'?'sel':''}" onclick="pick('Arjun')">${svgChar('Arjun')}</div></div></div>`;
  h+=tutorBox(S.p==='Anaya'?`Hi! I am Anaya, your English teacher. Pick a lesson and I will help you. Small steps every day! 😊`:`Hi! I am Arjun, your English teacher. Let us start. Small steps every day! 💪`);
  h+=`<div class="card"><b>Your rewards</b><div class="goal">Today: ${S.days.includes(today())?'✅ lesson done':'⬜ finish 1 lesson'} | 🔥 ${streak()} day streak | ⭐ ${S.xp} XP</div><div>${BADGES.map(b=>`<span class="bdg ${(S.b||{})[b[1]]?'':'off'}">${b[0]} ${b[1]}</span>`).join('')}</div>
- <div class="row" style="margin-top:10px"><span class="note">Tap a teacher above to switch.</span><a class="btn sm alt" href="#/ask">💬 Ask teacher</a></div>
+ <div class="row" style="margin-top:10px"><span class="note">Tap a teacher above to switch.</span><a class="btn sm" style="background:linear-gradient(120deg,#f59e0b,#ef4444)" href="#/kids">🧒 Kids Zone</a><a class="btn sm alt" href="#/ask">💬 Ask teacher</a><button class="btn sm alt" onclick="setL(S.lang==='kn'?'hi':'kn')">🌐 ${S.lang==='kn'?'हिन्दी':'ಕನ್ನಡ'}</button></div>
  <div class="note" style="margin-top:6px">Your teacher: ${S.p} ${S.g==='na'?'(you chose)':'(suggested for you)'}. Tap the other teacher above to switch. Voices come from your phone. Use Chrome for the best voice and speaking check.</div></div>`;
  LEVELS.forEach(l=>{
-  if(l.soon){h+=`<div class="card lv soon"><b>${l.name}</b> <span class="tag">Coming soon</span><div class="note">${l.kn} - ${l.soon}. Advanced levels will be added later.</div></div>`;return}
+  if(l.soon){h+=`<div class="card lv soon"><b>${l.name}</b> <span class="tag">Coming soon</span><div class="note">${S.lang==='hi'?LV_HI[l.id]:l.kn} - ${l.soon}. Advanced levels will be added later.</div></div>`;return}
   const n=l.lessons.filter((_,i)=>S.done[l.id+'-'+i]).length;
-  h+=`<div class="card lv"><b>${l.name}</b> <span class="tag g">Free</span><div class="note">${l.kn} - ${n}/${l.lessons.length} lessons done</div><div class="prog" style="margin:8px 0 0"><i style="width:${100*n/l.lessons.length}%"></i></div>`;
-  l.lessons.forEach((x,i)=>{const d=S.done[l.id+'-'+i];h+=`<a class="ls" href="#/lesson/${l.id}/${i}"><div><b>${i+1}. ${x.t}</b><span>${x.kn} - ${x.items.length} words</span></div><span class="${d?'done':''}">${d?'✓ Done':'Start ›'}</span></a>`});
+  h+=`<div class="card lv"><b>${l.name}</b> <span class="tag g">Free</span><div class="note">${S.lang==='hi'?LV_HI[l.id]:l.kn} - ${n}/${l.lessons.length} lessons done</div><div class="prog" style="margin:8px 0 0"><i style="width:${100*n/l.lessons.length}%"></i></div>`;
+  l.lessons.forEach((x,i)=>{const d=S.done[l.id+'-'+i];h+=`<a class="ls" href="#/lesson/${l.id}/${i}"><div><b>${i+1}. ${x.t}</b><span>${tl(x)} - ${x.items.length} words</span></div><span class="${d?'done':''}">${d?'✓ Done':'Start ›'}</span></a>`});
   h+=`</div>`});
  $('#app').innerHTML=h}
 function pick(p){S.p=p;save();home()}
@@ -168,10 +187,10 @@ function lesson(l,i){const x=LEVELS[l-1].lessons[i];let k=0;
  function card(){const it=x.items[k];
   $('#app').innerHTML=`<div class="prog"><i style="width:${100*k/x.items.length}%"></i></div>`+
   tutorBox(k==0?`Lesson: <b>${x.t}</b>. Listen first, then say it out loud.`:`Good! Next one.`)+
-  `<div class="card"><div class="big">${esc(it.en)}</div><div class="kn">${it.kn}</div><div class="say">${it.say!==it.en?esc(it.say):''}</div>
-  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn sm" id="b1">🔊 Listen ಕೇಳಿ</button><button class="btn sm alt" id="b2">🐢 Slow</button><button class="btn sm alt" id="b3">🎤 Speak ಹೇಳಿ</button></div>
+  `<div class="card"><div class="big">${esc(it.en)}</div><div class="kn">${tr(it)}</div><div class="say">${it.say!==it.en?esc(it.say):''}</div>
+  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn sm" id="b1">🔊 Listen ${T('listen')}</button><button class="btn sm alt" id="b2">🐢 Slow</button><button class="btn sm alt" id="b3">🎤 Speak ${T('speak')}</button></div>
   <div class="fb" id="fb" style="text-align:center"></div></div>
-  <div class="row"><button class="btn alt" id="pv" ${k?'':'disabled'}>‹ Back</button><button class="btn" id="nx">${k==x.items.length-1?'Start quiz ›':'Next ಮುಂದೆ ›'}</button></div>`;
+  <div class="row"><button class="btn alt" id="pv" ${k?'':'disabled'}>‹ Back</button><button class="btn" id="nx">${k==x.items.length-1?'Start quiz ›':'Next '+T('next')+' ›'}</button></div>`;
   $('#b1').onclick=()=>speak(it.say);$('#b2').onclick=()=>speak(it.say,true);
   $('#b3').onclick=()=>{const f=$('#fb');f.className='fb';f.textContent='Listening... speak now';
    listen(it.say,a=>{if(a===null){f.textContent='Speaking check needs Chrome. Say it out loud anyway - you can do it!';return}
@@ -184,17 +203,17 @@ function lesson(l,i){const x=LEVELS[l-1].lessons[i];let k=0;
 function quiz(l,i){const x=LEVELS[l-1].lessons[i];const all=[].concat(...LEVELS.flatMap(v=>v.lessons.map(z=>z.items)));
  const items=shuf(x.items).slice(0,Math.min(8,x.items.length));const qs=[];
  items.forEach((it,n)=>{const t=n%3;
-  if(t===0){const o=shuf(x.items.filter(z=>z.kn!==it.kn).concat(all.filter(z=>z.kn!==it.kn))).filter((z,j,a)=>a.findIndex(y=>y.kn===z.kn)===j).slice(0,3).map(z=>z.kn);qs.push({q:`What does <b>${esc(it.en)}</b> mean in Kannada?`,o:shuf(o.concat(it.kn)),a:it.kn,listen:it.say})}
-  else if(t===1){const o=shuf(x.items.filter(z=>z.en!==it.en).concat(all.filter(z=>z.en!==it.en))).filter((z,j,a)=>a.findIndex(y=>y.en===z.en)===j).slice(0,3).map(z=>z.en);qs.push({q:`Which English is <b>${it.kn}</b>?`,o:shuf(o.concat(it.en)),a:it.en})}
-  else qs.push({q:`Type in English: <b>${it.kn}</b>`,type:1,a:it.en,hint:it.en.split(' ').map(w=>w[0]+'_'.repeat(Math.max(0,w.length-1))).join(' ')})});
+  if(t===0){const o=shuf(x.items.filter(z=>tr(z)!==tr(it)).concat(all.filter(z=>tr(z)!==tr(it)))).filter((z,j,a)=>a.findIndex(y=>tr(y)===tr(z))===j).slice(0,3).map(z=>tr(z));qs.push({q:`What does <b>${esc(it.en)}</b> mean in Kannada?`,o:shuf(o.concat(tr(it))),a:tr(it),listen:it.say})}
+  else if(t===1){const o=shuf(x.items.filter(z=>z.en!==it.en).concat(all.filter(z=>z.en!==it.en))).filter((z,j,a)=>a.findIndex(y=>y.en===z.en)===j).slice(0,3).map(z=>z.en);qs.push({q:`Which English is <b>${tr(it)}</b>?`,o:shuf(o.concat(it.en)),a:it.en})}
+  else qs.push({q:`Type in English: <b>${tr(it)}</b>`,type:1,a:it.en,hint:it.en.split(' ').map(w=>w[0]+'_'.repeat(Math.max(0,w.length-1))).join(' ')})});
  let k=0,ok=0;
  function show(){const q=qs[k];let h=`<div class="prog"><i style="width:${100*k/qs.length}%"></i></div><div class="card"><div class="note">Quiz ${k+1} of ${qs.length}</div><h2 style="margin-top:4px">${q.q}</h2>`;
   if(q.listen)h+=`<button class="btn sm alt" id="ls">🔊 Listen</button>`;
-  if(q.type)h+=`<div class="note">Hint: ${q.hint}</div><input type="text" id="ti" autocomplete="off" autocapitalize="off" style="margin-top:8px"><button class="btn" id="ck" style="margin-top:10px">Check ಪರಿಶೀಲಿಸಿ</button>`;
+  if(q.type)h+=`<div class="note">Hint: ${q.hint}</div><input type="text" id="ti" autocomplete="off" autocapitalize="off" style="margin-top:8px"><button class="btn" id="ck" style="margin-top:10px">Check ${T('check')}</button>`;
   else q.o.forEach((o,j)=>h+=`<button class="opt" data-j="${j}">${esc(o)}</button>`);
-  h+=`<div class="fb" id="fb"></div><button class="btn" id="nq" style="display:none">Next ಮುಂದೆ ›</button></div>`;$('#app').innerHTML=h;
+  h+=`<div class="fb" id="fb"></div><button class="btn" id="nq" style="display:none">Next ${T('next')} ›</button></div>`;$('#app').innerHTML=h;
   if(q.listen)$('#ls').onclick=()=>speak(q.listen);
-  const fin=good=>{const f=$('#fb');if(good){ok++;S.xp+=5;f.className='fb ok';f.textContent='Correct ಸರಿ! +5 XP'}else{f.className='fb bad';f.textContent='Not correct. Answer: '+q.a}
+  const fin=good=>{const f=$('#fb');if(good){ok++;S.xp+=5;f.className='fb ok';f.textContent='Correct '+T('ok')+'! +5 XP'}else{f.className='fb bad';f.textContent='Not correct. Answer: '+q.a}
    save();const n=$('#nq');n.style.display='inline-block';n.onclick=()=>{k++;k<qs.length?show():end()}};
   if(q.type){$('#ck').onclick=()=>{$('#ck').disabled=true;$('#ti').disabled=true;fin(norm($('#ti').value)===norm(q.a))};$('#ti').addEventListener('keydown',e=>{if(e.key==='Enter')$('#ck').click()})}
   else document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const g=q.o[+b.dataset.j]===q.a;document.querySelectorAll('.opt').forEach(z=>{z.disabled=true;if(q.o[+z.dataset.j]===q.a)z.classList.add('ok')});if(!g)b.classList.add('bad');fin(g)})}
@@ -209,10 +228,35 @@ function ask(){let h=`<h1>Ask the teacher</h1>`+tutorBox(`Write a sentence and I
  $('#app').innerHTML=h;const ch=$('#ch');
  $('#go').onclick=async()=>{const t=$('#q').value.trim();if(!t)return;$('#q').value='';ch.innerHTML+=`<div class="m u">${esc(t)}</div>`;
   const w=document.createElement('div');w.className='m t';w.textContent='...';ch.appendChild(w);ch.scrollTop=1e5;
-  try{const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:t,persona:S.p,level:'Beginner'})});const j=await r.json();w.textContent=j.reply;speak(j.reply.slice(0,200))}
+  try{const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:t,persona:S.p,lang:S.lang,level:'Beginner'})});const j=await r.json();w.textContent=j.reply;speak(j.reply.slice(0,200))}
   catch(e){w.textContent='No internet. Please try again.'}ch.scrollTop=1e5}}
+
+const KSETS={
+ abc:{t:"ABC",e:"🔤",items:[["A","Apple","🍎"],["B","Ball","⚽"],["C","Cat","🐱"],["D","Dog","🐶"],["E","Elephant","🐘"],["F","Fish","🐟"],["G","Goat","🐐"],["H","Hat","🎩"],["I","Ice cream","🍦"],["J","Juice","🧃"],["K","Kite","🪁"],["L","Lion","🦁"],["M","Moon","🌙"],["N","Nest","🪺"],["O","Orange","🍊"],["P","Parrot","🦜"],["Q","Queen","👑"],["R","Rabbit","🐰"],["S","Sun","☀️"],["T","Tiger","🐯"],["U","Umbrella","☂️"],["V","Van","🚐"],["W","Watch","⌚"],["X","Xylophone","🎶"],["Y","Yo-yo","🪀"],["Z","Zebra","🦓"]]},
+ animals:{t:"Animals",e:"🐘",items:[["","Cow","🐄"],["","Horse","🐴"],["","Duck","🦆"],["","Cat","🐱"],["","Dog","🐶"],["","Fish","🐟"],["","Bird","🐦"],["","Monkey","🐒"],["","Bear","🐻"],["","Pig","🐷"]]},
+ fruits:{t:"Fruits",e:"🍌",items:[["","Apple","🍎"],["","Banana","🍌"],["","Grapes","🍇"],["","Mango","🥭"],["","Watermelon","🍉"],["","Pineapple","🍍"],["","Orange","🍊"]]},
+ colors:{t:"Colors",e:"🎨",items:[["","Red","🔴"],["","Blue","🔵"],["","Green","🟢"],["","Yellow","🟡"],["","Orange","🟠"],["","Purple","🟣"],["","Black","⚫"],["","White","⚪"]]},
+ nums:{t:"Numbers",e:"🔢",items:[["1","One","⭐"],["2","Two","⭐⭐"],["3","Three","⭐⭐⭐"],["4","Four","⭐⭐⭐⭐"],["5","Five","⭐⭐⭐⭐⭐"],["6","Six","⭐⭐⭐⭐⭐⭐"],["7","Seven","⭐⭐⭐⭐⭐⭐⭐"],["8","Eight","⭐⭐⭐⭐⭐⭐⭐⭐"],["9","Nine","⭐⭐⭐⭐⭐⭐⭐⭐⭐"],["10","Ten","⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐"]]}
+};
+const KC=['#ef4444','#f59e0b','#10b981','#3b82f6','#8b5cf6','#ec4899','#14b8a6','#f97316'];
+function kidsHome(){S.ks=S.ks||0;let h=`<h1>🧒 Kids Zone</h1><div class="kg"><b>Hello little friend!</b> Tap a picture to hear the word. Play the game to win stars ⭐ <b>${S.ks}</b><div class="note">For parents: no ads, no chat, no sign-up, no personal data. Progress stays on this phone only.</div></div><div class="kt">`;
+ Object.keys(KSETS).forEach((k,i)=>h+=`<button style="background:${KC[i]}" onclick="location.hash='#/kids/${k}'"><span class="e">${KSETS[k].e}</span><span>${KSETS[k].t}</span></button>`);
+ h+=`<button style="background:${KC[5]}" onclick="location.hash='#/kids/game'"><span class="e">🎮</span><span>Game</span></button></div><p><a class="btn alt" href="#/">‹ Back</a></p>`;$('#app').innerHTML=h}
+function kidsSet(k){const set=KSETS[k];let h=`<h1>${set.e} ${set.t}</h1><div class="kt">`;
+ set.items.forEach((it,i)=>h+=`<button style="background:${KC[i%KC.length]}" onclick="kSay('${k}',${i})"><span class="e">${it[2].length>8?'⭐':it[2]}</span><span class="l">${it[0]||''}</span><span>${it[1]}</span></button>`);
+ h+=`</div><div class="kbig" id="kb"></div><p><a class="btn alt" href="#/kids">‹ Back</a></p>`;$('#app').innerHTML=h}
+function kSay(k,i){const it=KSETS[k].items[i];$('#kb').textContent=it[2];speak((it[0]&&k==='abc'?it[0]+' for ':'')+it[1],true)}
+function kidsGame(){const pool=[].concat(...['abc','animals','fruits'].map(k=>KSETS[k].items)).filter(x=>x[2].length<8);let n=0,sc=0;
+ function q(){const a=pool[Math.floor(Math.random()*pool.length)];const o=shuf(shuf(pool.filter(x=>x!==a)).slice(0,2).concat([a]));
+  $('#app').innerHTML=`<h1>🎮 Listen and tap</h1><div class="kg">Round ${n+1} of 5 &nbsp; ⭐ ${sc}<div style="margin-top:8px"><button class="kb" style="background:#8b5cf6" id="kl">🔊 Hear the word</button></div></div><div class="kt">${o.map((x,i)=>`<button style="background:${KC[i]}" data-w="${x[1]}"><span class="e">${x[2]}</span></button>`).join('')}</div><div class="fb" id="fb" style="text-align:center;font-size:20px"></div><p><a class="btn alt" href="#/kids">‹ Back</a></p>`;
+  $('#kl').onclick=()=>speak(a[1],true);setTimeout(()=>speak(a[1],true),300);
+  document.querySelectorAll('.kt button').forEach(b=>b.onclick=()=>{const g=b.dataset.w===a[1];const f=$('#fb');
+   if(g){sc++;S.ks=(S.ks||0)+1;save();f.className='fb ok';f.textContent='⭐ Yes! '+a[1];speak('Yes! '+a[1]);setTimeout(()=>{n++;n<5?q():end()},1300)}
+   else{f.className='fb bad';f.textContent='Try again 🙂';speak('Try again')}})}
+ function end(){$('#app').innerHTML=`<div class="kg" style="text-align:center"><div class="kbig">🏆</div><h2>You got ${sc} stars!</h2><p><button class="btn" onclick="location.hash='#/kids/game';route()">Play again</button> <a class="btn alt" href="#/kids">Kids Zone</a></p></div>`;speak('Well done! You are a star!')}
+ q()}
 function route(){("speechSynthesis" in window)&&speechSynthesis.cancel();const p=location.hash.replace(/^#\/?/,'').split('/');window.scrollTo(0,0);
- if(p[0]==='lesson'&&LEVELS[p[1]-1]&&LEVELS[p[1]-1].lessons[p[2]])lesson(+p[1],+p[2]);else if(p[0]==='ask')ask();else home()}
+ if(p[0]==='lesson'&&LEVELS[p[1]-1]&&LEVELS[p[1]-1].lessons[p[2]])lesson(+p[1],+p[2]);else if(p[0]==='ask')ask();else if(p[0]==='kids'){!p[1]?kidsHome():p[1]==='game'?kidsGame():KSETS[p[1]]?kidsSet(p[1]):kidsHome()}else home()}
 addEventListener('hashchange',route);hdr();route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
 </script></body></html>
