@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Nexora English - Learn English with an AI Teacher (Kannada + English)</title>
+<meta name="description" content="Learn English step by step from A to Z with a friendly AI teacher. Lessons, quizzes and speaking practice with Kannada explanations. Free to start.">
+<meta name="theme-color" content="#7c3aed">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--p:#7c3aed;--k:#ec4899;--bg:#faf7ff;--ink:#1f1535;--mut:#6b6485;--ok:#16a34a;--bad:#dc2626}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Kannada",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header{background:linear-gradient(120deg,var(--p),var(--k));color:#fff;padding:12px 16px;position:sticky;top:0;z-index:5}
+.hw{max-width:760px;margin:auto;display:flex;align-items:center;gap:10px;justify-content:space-between}
+.logo{font-weight:800;font-size:19px;color:#fff;text-decoration:none}
+.logo small{font-weight:500;opacity:.85;font-size:12px;display:block}
+.chips{display:flex;gap:8px;font-size:13px;font-weight:700}
+.chip{background:rgba(255,255,255,.2);padding:4px 10px;border-radius:99px}
+main{max-width:760px;margin:auto;padding:16px 16px 90px}
+h1{font-size:24px;margin:8px 0}h2{font-size:19px;margin:18px 0 8px}
+.card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 10px rgba(80,40,160,.08);margin-bottom:12px}
+.btn{display:inline-block;border:0;border-radius:12px;padding:12px 18px;font-size:16px;font-weight:700;cursor:pointer;background:linear-gradient(120deg,var(--p),var(--k));color:#fff;text-decoration:none;font-family:inherit}
+.btn.alt{background:#ede9fe;color:var(--p)}.btn.sm{padding:8px 12px;font-size:14px}.btn:disabled{opacity:.45}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tutor{display:flex;gap:12px;align-items:center}
+.av{width:64px;height:64px;border-radius:50%;background:#f3e8ff;display:flex;align-items:center;justify-content:center;font-size:36px;flex:none}
+.av.talk{animation:pulse .7s infinite alternate}
+@keyframes pulse{to{box-shadow:0 0 0 10px rgba(124,58,237,.18)}}
+.bubble{background:#f3e8ff;border-radius:14px;padding:10px 12px;font-size:15px}
+.lv{border-left:5px solid var(--p)}.lv.soon{border-color:#cbd5e1;opacity:.75}
+.ls{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid #eee;text-decoration:none;color:inherit;gap:8px}
+.ls b{display:block}.ls span{font-size:13px;color:var(--mut)}
+.done{color:var(--ok);font-weight:800}
+.big{font-size:30px;font-weight:800;text-align:center;margin:10px 0 2px}
+.kn{font-size:24px;text-align:center;color:var(--p);margin:2px 0 8px}
+.say{text-align:center;color:var(--mut);font-size:14px}
+.prog{height:8px;background:#e9e3f7;border-radius:9px;overflow:hidden;margin-bottom:14px}.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--k))}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:14px;border-radius:12px;border:2px solid #e5def7;background:#fff;font-size:18px;cursor:pointer;font-family:inherit}
+.opt.ok{border-color:var(--ok);background:#dcfce7}.opt.bad{border-color:var(--bad);background:#fee2e2}
+input[type=text],textarea{width:100%;padding:12px;border:2px solid #e5def7;border-radius:12px;font-size:17px;font-family:inherit}
+.fb{margin:10px 0;font-weight:700}.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+.note{font-size:12.5px;color:var(--mut)}
+.tag{font-size:11px;background:#fde68a;color:#78350f;border-radius:6px;padding:2px 6px;font-weight:700}
+.tag.g{background:#bbf7d0;color:#14532d}
+footer{max-width:760px;margin:auto;padding:0 16px 40px;font-size:13px;color:var(--mut)}
+footer a{color:var(--p)}
+.chat{max-height:300px;overflow:auto}.m{margin:6px 0;padding:8px 10px;border-radius:12px;max-width:90%}.m.u{background:#ede9fe;margin-left:auto}.m.t{background:#fdf2f8}
+
+.av{width:72px;height:72px;overflow:hidden;background:linear-gradient(160deg,#ede9fe,#fce7f3)}
+.av svg{width:100%;height:100%}
+.av.talk{animation:none}.av.talk .mouth{animation:mth .22s infinite alternate}
+@keyframes mth{from{ry:2px}to{ry:7px}}
+.eye{animation:bl 4s infinite;transform-origin:center;transform-box:fill-box}
+@keyframes bl{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.hero{background:linear-gradient(135deg,#7c3aed,#ec4899);border-radius:22px;color:#fff;padding:16px;margin:6px 0 14px;display:flex;align-items:flex-end;justify-content:space-between;gap:8px;overflow:hidden}
+.hero h1{margin:0 0 6px;font-size:22px}.hero p{margin:0 0 10px;font-size:14px;opacity:.95}
+.hero .chars{display:flex;gap:2px;flex:none}.hero .chars div{width:92px;height:110px;cursor:pointer;border-radius:16px 16px 0 0;background:rgba(255,255,255,.18);overflow:hidden;border:3px solid transparent}
+.hero .chars div.sel{border-color:#fde047;background:rgba(255,255,255,.35)}
+.hero .chars svg{width:100%;height:100%}
+.hero .btn{background:#fff;color:var(--p)}
+.goal{display:flex;gap:6px;align-items:center;font-size:13px;margin-top:6px}
+.bdg{display:inline-flex;align-items:center;gap:4px;background:#fff7ed;border:1px solid #fed7aa;border-radius:99px;padding:4px 10px;font-size:13px;font-weight:700;margin:3px 3px 0 0}
+.bdg.off{filter:grayscale(1);opacity:.45}
+.pop{position:fixed;left:50%;top:70px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 16px;border-radius:12px;z-index:9;font-weight:700;animation:pp 2.6s forwards}
+@keyframes pp{0%{opacity:0;top:50px}10%,80%{opacity:1;top:70px}100%{opacity:0}}
+</style></head><body>
+<header><div class="hw"><a class="logo" href="#/">Nexora English<small>AI teacher - ಕನ್ನಡ + English</small></a>
+<div class="chips"><span class="chip" id="xp">0 XP</span><span class="chip" id="st">0 day</span></div></div></header>
+<main id="app"></main>
+<footer>
+<p><b>More from Nexora:</b> <a href="https://nexora-web-q7rn.onrender.com" target="_blank" rel="noopener">Nexora - documents and PDF tools</a> | <a href="https://nexora-markets-web.onrender.com" target="_blank" rel="noopener">Nexora Markets</a></p>
+<p>Free to start. Kannada help is for learning only - please tell us if you see a mistake. Built with Instinct.</p>
+</footer>
+<script>
+const $=s=>document.querySelector(s);
+const L=(en,kn,say)=>({en,kn,say:say||en});
+const LEVELS=[
+{id:1,name:"Level 1 - Beginner",kn:"ಹಂತ 1 - ಆರಂಭ",lessons:[
+ {t:"Letters A to H",kn:"ಅಕ್ಷರಗಳು A-H",items:[L("Apple","ಸೇಬು","A for Apple"),L("Ball","ಚೆಂಡು","B for Ball"),L("Cat","ಬೆಕ್ಕು","C for Cat"),L("Dog","ನಾಯಿ","D for Dog"),L("Elephant","ಆನೆ","E for Elephant"),L("Fish","ಮೀನು","F for Fish"),L("Goat","ಮೇಕೆ","G for Goat"),L("Hand","ಕೈ","H for Hand")]},
+ {t:"Letters I to P",kn:"ಅಕ್ಷರಗಳು I-P",items:[L("Ink","ಶಾಯಿ","I for Ink"),L("Jug","ಜಗ್","J for Jug"),L("King","ರಾಜ","K for King"),L("Lion","ಸಿಂಹ","L for Lion"),L("Mango","ಮಾವಿನಹಣ್ಣು","M for Mango"),L("Nose","ಮೂಗು","N for Nose"),L("Orange","ಕಿತ್ತಳೆ","O for Orange"),L("Parrot","ಗಿಳಿ","P for Parrot")]},
+ {t:"Letters Q to Z",kn:"ಅಕ್ಷರಗಳು Q-Z",items:[L("Queen","ರಾಣಿ","Q for Queen"),L("Rabbit","ಮೊಲ","R for Rabbit"),L("Sun","ಸೂರ್ಯ","S for Sun"),L("Tiger","ಹುಲಿ","T for Tiger"),L("Umbrella","ಛತ್ರಿ","U for Umbrella"),L("Van","ವ್ಯಾನ್","V for Van"),L("Water","ನೀರು","W for Water"),L("Yellow","ಹಳದಿ","Y for Yellow"),L("Zebra","ಜೀಬ್ರಾ","Z for Zebra")]},
+ {t:"Greetings",kn:"ಶುಭಾಶಯಗಳು",items:[L("Hello","ನಮಸ್ಕಾರ"),L("Good morning","ಶುಭೋದಯ"),L("Good night","ಶುಭ ರಾತ್ರಿ"),L("Thank you","ಧನ್ಯವಾದಗಳು"),L("Please","ದಯವಿಟ್ಟು"),L("Sorry","ಕ್ಷಮಿಸಿ"),L("Yes","ಹೌದು"),L("No","ಇಲ್ಲ"),L("Welcome","ಸ್ವಾಗತ")]},
+ {t:"About me",kn:"ನನ್ನ ಬಗ್ಗೆ",items:[L("How are you?","ನೀವು ಹೇಗಿದ್ದೀರಿ?"),L("I am fine.","ನಾನು ಚೆನ್ನಾಗಿದ್ದೇನೆ."),L("My name is Ravi.","ನನ್ನ ಹೆಸರು ರವಿ."),L("Nice to meet you.","ನಿಮ್ಮನ್ನು ಭೇಟಿಯಾಗಿ ಸಂತೋಷವಾಯಿತು."),L("I am a student.","ನಾನು ವಿದ್ಯಾರ್ಥಿ."),L("Where are you from?","ನೀವು ಎಲ್ಲಿಂದ ಬಂದಿದ್ದೀರಿ?"),L("I live in Bengaluru.","ನಾನು ಬೆಂಗಳೂರಿನಲ್ಲಿ ವಾಸಿಸುತ್ತೇನೆ.")]},
+ {t:"Numbers 1 to 10",kn:"ಸಂಖ್ಯೆಗಳು 1-10",items:[L("One","ಒಂದು"),L("Two","ಎರಡು"),L("Three","ಮೂರು"),L("Four","ನಾಲ್ಕು"),L("Five","ಐದು"),L("Six","ಆರು"),L("Seven","ಏಳು"),L("Eight","ಎಂಟು"),L("Nine","ಒಂಬತ್ತು"),L("Ten","ಹತ್ತು")]},
+ {t:"Days of the week",kn:"ವಾರದ ದಿನಗಳು",items:[L("Monday","ಸೋಮವಾರ"),L("Tuesday","ಮಂಗಳವಾರ"),L("Wednesday","ಬುಧವಾರ"),L("Thursday","ಗುರುವಾರ"),L("Friday","ಶುಕ್ರವಾರ"),L("Saturday","ಶನಿವಾರ"),L("Sunday","ಭಾನುವಾರ")]},
+ {t:"Family and friends",kn:"ಕುಟುಂಬ ಮತ್ತು ಸ್ನೇಹಿತರು",items:[L("Mother","ತಾಯಿ"),L("Father","ತಂದೆ"),L("Brother","ಅಣ್ಣ"),L("Sister","ಅಕ್ಕ"),L("Friend","ಸ್ನೇಹಿತ"),L("Teacher","ಶಿಕ್ಷಕ"),L("Child","ಮಗು")]},
+ {t:"Things around me",kn:"ನನ್ನ ಸುತ್ತಲಿನ ವಸ್ತುಗಳು",items:[L("House","ಮನೆ"),L("Book","ಪುಸ್ತಕ"),L("Food","ಊಟ"),L("School","ಶಾಲೆ"),L("Office","ಕಚೇರಿ"),L("Work","ಕೆಲಸ"),L("Money","ಹಣ"),L("Phone","ಫೋನ್")]}
+]},
+{id:2,name:"Level 2 - Elementary",kn:"ಹಂತ 2 - ಪ್ರಾಥಮಿಕ",lessons:[
+ {t:"Simple sentences: I am, you are",kn:"ಸರಳ ವಾಕ್ಯಗಳು",items:[L("I am happy.","ನಾನು ಸಂತೋಷವಾಗಿದ್ದೇನೆ."),L("You are my friend.","ನೀನು ನನ್ನ ಸ್ನೇಹಿತ."),L("He is a doctor.","ಅವನು ವೈದ್ಯ."),L("She is a teacher.","ಅವಳು ಶಿಕ್ಷಕಿ."),L("We are at home.","ನಾವು ಮನೆಯಲ್ಲಿದ್ದೇವೆ."),L("They are students.","ಅವರು ವಿದ್ಯಾರ್ಥಿಗಳು.")]},
+ {t:"Useful questions",kn:"ಉಪಯುಕ್ತ ಪ್ರಶ್ನೆಗಳು",items:[L("What is your name?","ನಿಮ್ಮ ಹೆಸರೇನು?"),L("Where is the bus stand?","ಬಸ್ ನಿಲ್ದಾಣ ಎಲ್ಲಿದೆ?"),L("What is the time?","ಈಗ ಸಮಯ ಎಷ್ಟು?"),L("How much is this?","ಇದು ಎಷ್ಟು?"),L("Can you help me?","ನೀವು ನನಗೆ ಸಹಾಯ ಮಾಡಬಹುದೇ?"),L("Do you understand?","ನಿಮಗೆ ಅರ್ಥವಾಯಿತೇ?")]},
+ {t:"Daily actions",kn:"ದೈನಂದಿನ ಕೆಲಸಗಳು",items:[L("I eat rice.","ನಾನು ಅನ್ನ ತಿನ್ನುತ್ತೇನೆ."),L("I drink water.","ನಾನು ನೀರು ಕುಡಿಯುತ್ತೇನೆ."),L("I go to office.","ನಾನು ಕಚೇರಿಗೆ ಹೋಗುತ್ತೇನೆ."),L("I read a book.","ನಾನು ಪುಸ್ತಕ ಓದುತ್ತೇನೆ."),L("I write a letter.","ನಾನು ಪತ್ರ ಬರೆಯುತ್ತೇನೆ."),L("I speak English.","ನಾನು ಇಂಗ್ಲಿಷ್ ಮಾತನಾಡುತ್ತೇನೆ.")]},
+ {t:"Asking for help",kn:"ಸಹಾಯ ಕೇಳುವುದು",items:[L("I do not understand.","ನನಗೆ ಅರ್ಥವಾಗಲಿಲ್ಲ."),L("Please speak slowly.","ದಯವಿಟ್ಟು ನಿಧಾನವಾಗಿ ಮಾತನಾಡಿ."),L("Please say it again.","ದಯವಿಟ್ಟು ಇನ್ನೊಮ್ಮೆ ಹೇಳಿ."),L("I want water.","ನನಗೆ ನೀರು ಬೇಕು."),L("I need help.","ನನಗೆ ಸಹಾಯ ಬೇಕು.")]}
+]},
+{id:3,name:"Level 3 - Intermediate",kn:"ಹಂತ 3 - ಮಧ್ಯಮ",soon:"Past and future tense, office English, phone calls",lessons:[]},
+{id:4,name:"Level 4 - Advanced",kn:"ಹಂತ 4 - ಮುಂದುವರಿದ",soon:"Interview English, writing emails, long talks",lessons:[]}
+];
+const S=JSON.parse(localStorage.getItem('ne')||'{}');S.xp=S.xp||0;S.done=S.done||{};S.days=S.days||[];S.p=S.p||'Anaya';
+function save(){localStorage.setItem('ne',JSON.stringify(S));hdr()}
+function today(){return new Date().toISOString().slice(0,10)}
+function touch(){const t=today();if(!S.days.includes(t))S.days.push(t);S.days=S.days.slice(-400);save()}
+function streak(){let n=0,d=new Date();while(S.days.includes(d.toISOString().slice(0,10))){n++;d.setDate(d.getDate()-1)}return n}
+function hdr(){$('#xp').textContent=S.xp+' XP';$('#st').textContent=streak()+' day'+(streak()==1?'':'s')}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+/* speech */
+let voices=[];function lv(){voices=speechSynthesis?speechSynthesis.getVoices():[]}
+if('speechSynthesis' in window){lv();speechSynthesis.onvoiceschanged=lv}
+function pickVoice(p){const en=voices.filter(v=>/^en/i.test(v.lang));if(!en.length)return null;
+ const inn=en.filter(v=>/en[-_]IN/i.test(v.lang));const pool=inn.length?inn:en;
+ const fem=/female|heera|zira|samantha|aria|jenny|susan|karen|veena|priya|neerja|google.*(uk english female|us english)/i,mal=/\bmale\b|ravi|david|daniel|mark|guy|prabhat|rishi|george/i;
+ const want=p==='Anaya'?fem:mal;return pool.find(v=>want.test(v.name)&&!(p==='Arjun'&&/female/i.test(v.name)))||pool[0]}
+function speak(t,slow,done){if(!('speechSynthesis' in window)){done&&done();return}
+ speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-IN';const v=pickVoice(S.p);if(v){u.voice=v;u.lang=v.lang}
+ u.rate=slow?0.7:0.9;u.pitch=S.p==='Anaya'?1.15:0.8;const av=$('.av');if(av)av.classList.add('talk');
+ u.onend=u.onerror=()=>{const a=$('.av');if(a)a.classList.remove('talk');done&&done()};speechSynthesis.speak(u)}
+function listen(target,cb){const R=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!R){cb(null);return}const r=new R();r.lang='en-IN';r.interimResults=false;r.maxAlternatives=3;
+ r.onresult=e=>{const alts=[...e.results[0]].map(a=>a.transcript);cb(alts)};r.onerror=()=>cb([]);r.onend=()=>{};
+ try{r.start()}catch(e){cb([])}}
+function score(target,heard){const a=norm(target).split(' '),h=norm(heard).split(' ');let hit=0;a.forEach(w=>{if(h.includes(w))hit++});return Math.round(100*hit/a.length)}
+
+function svgChar(p){const girl=p==='Anaya';
+ const skin=girl?'#e8b08a':'#d9a07a',hair=girl?'#2b1b3a':'#1c1420',cloth=girl?'#ec4899':'#2563eb';
+ return `<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+ ${girl?`<ellipse cx="50" cy="52" rx="34" ry="38" fill="${hair}"/><circle cx="50" cy="12" r="11" fill="${hair}"/><rect x="14" y="52" width="14" height="42" rx="7" fill="${hair}"/><rect x="72" y="52" width="14" height="42" rx="7" fill="${hair}"/>`:''}
+ <path d="M12 120 Q14 88 50 86 Q86 88 88 120Z" fill="${cloth}"/><path d="M40 86 L50 100 L60 86Z" fill="#fff" opacity=".9"/>
+ <rect x="43" y="72" width="14" height="16" rx="6" fill="${skin}"/>
+ <ellipse cx="50" cy="52" rx="27" ry="30" fill="${skin}"/>
+ ${girl?`<path d="M23 50 Q24 18 50 18 Q76 18 77 50 Q64 32 50 32 Q36 32 23 50Z" fill="${hair}"/><circle cx="24" cy="64" r="3" fill="#fde047"/><circle cx="76" cy="64" r="3" fill="#fde047"/><circle cx="50" cy="41" r="2" fill="#dc2626"/>`
+ :`<path d="M22 46 Q20 16 50 17 Q80 16 78 46 Q72 30 50 30 Q28 30 22 46Z" fill="${hair}"/><rect x="26" y="38" width="48" height="4" rx="2" fill="${hair}" opacity="0"/>`}
+ <ellipse cx="38" cy="54" rx="4.2" ry="5" fill="#fff"/><ellipse cx="62" cy="54" rx="4.2" ry="5" fill="#fff"/>
+ <ellipse class="eye" cx="38.5" cy="55" rx="2.6" ry="3.4" fill="#1f1535"/><ellipse class="eye" cx="62.5" cy="55" rx="2.6" ry="3.4" fill="#1f1535"/>
+ <path d="M32 47 Q38 43 44 47M56 47 Q62 43 68 47" stroke="${hair}" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+ <circle cx="30" cy="64" r="5" fill="#f9a8d4" opacity=".55"/><circle cx="70" cy="64" r="5" fill="#f9a8d4" opacity=".55"/>
+ <ellipse class="mouth" cx="50" cy="70" rx="7" ry="3" fill="#7f1d1d"/><path d="M43 69 Q50 76 57 69" stroke="#7f1d1d" stroke-width="1.5" fill="none" opacity=".0"/>
+ </svg>`}
+const BADGES=[["🚀","First lesson",()=>Object.keys(S.done).length>=1],["🔥","3-day streak",()=>streak()>=3],["⭐","100 XP",()=>S.xp>=100],["🏆","5 lessons",()=>Object.keys(S.done).length>=5],["💎","500 XP",()=>S.xp>=500]];
+function pop(t){const d=document.createElement('div');d.className='pop';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2700)}
+function checkBadges(){S.b=S.b||{};BADGES.forEach(b=>{if(!S.b[b[1]]&&b[2]()){S.b[b[1]]=1;pop(b[0]+' New badge: '+b[1])}});localStorage.setItem('ne',JSON.stringify(S))}
+const avatar=()=>S.p==='Anaya'?'👩‍🏫':'👨‍🏫';
+function tutorBox(msg){return `<div class="card tutor"><div class="av">${svgChar(S.p)}</div><div class="bubble"><b>${S.p}</b>: ${msg}</div></div>`}
+/* views */
+function setG(g){S.g=g;if(g==='girl')S.p='Arjun';else if(g==='boy')S.p='Anaya';save();home()}
+function welcome(){$('#app').innerHTML=`<div class="hero"><div><h1>Welcome! ಸ್ವಾಗತ</h1><p>Two friendly teachers are ready to help you learn English.</p></div><div class="chars"><div>${svgChar('Anaya')}</div><div>${svgChar('Arjun')}</div></div></div>
+ <div class="card"><b>I am a... (optional)</b><div class="note">We use this only to suggest your teacher. It stays on your phone. You can change the teacher any time.</div>
+ <div class="row" style="margin-top:10px"><button class="btn" onclick="setG('girl')">Girl / Woman</button><button class="btn" onclick="setG('boy')">Boy / Man</button><button class="btn alt" onclick="setG('na')">Prefer not to say</button></div></div>`}
+function home(){
+ if(!S.g)return welcome();
+  let h=`<div class="hero"><div><h1>Learn English with ${S.p}</h1><p>ಇಂಗ್ಲಿಷ್ ಕಲಿಯಿರಿ - listen, speak, play. A to Z, step by step.</p><a class="btn sm" href="#/lesson/1/0">Start now ›</a></div>
+ <div class="chars"><div class="${S.p==='Anaya'?'sel':''}" onclick="pick('Anaya')">${svgChar('Anaya')}</div><div class="${S.p==='Arjun'?'sel':''}" onclick="pick('Arjun')">${svgChar('Arjun')}</div></div></div>`;
+ h+=tutorBox(S.p==='Anaya'?`Hi! I am Anaya, your English teacher. Pick a lesson and I will help you. Small steps every day! 😊`:`Hi! I am Arjun, your English teacher. Let us start. Small steps every day! 💪`);
+ h+=`<div class="card"><b>Your rewards</b><div class="goal">Today: ${S.days.includes(today())?'✅ lesson done':'⬜ finish 1 lesson'} | 🔥 ${streak()} day streak | ⭐ ${S.xp} XP</div><div>${BADGES.map(b=>`<span class="bdg ${(S.b||{})[b[1]]?'':'off'}">${b[0]} ${b[1]}</span>`).join('')}</div>
+ <div class="row" style="margin-top:10px"><span class="note">Tap a teacher above to switch.</span><a class="btn sm alt" href="#/ask">💬 Ask teacher</a></div>
+ <div class="note" style="margin-top:6px">Your teacher: ${S.p} ${S.g==='na'?'(you chose)':'(suggested for you)'}. Tap the other teacher above to switch. Voices come from your phone. Use Chrome for the best voice and speaking check.</div></div>`;
+ LEVELS.forEach(l=>{
+  if(l.soon){h+=`<div class="card lv soon"><b>${l.name}</b> <span class="tag">Coming soon</span><div class="note">${l.kn} - ${l.soon}. Advanced levels will be added later.</div></div>`;return}
+  const n=l.lessons.filter((_,i)=>S.done[l.id+'-'+i]).length;
+  h+=`<div class="card lv"><b>${l.name}</b> <span class="tag g">Free</span><div class="note">${l.kn} - ${n}/${l.lessons.length} lessons done</div><div class="prog" style="margin:8px 0 0"><i style="width:${100*n/l.lessons.length}%"></i></div>`;
+  l.lessons.forEach((x,i)=>{const d=S.done[l.id+'-'+i];h+=`<a class="ls" href="#/lesson/${l.id}/${i}"><div><b>${i+1}. ${x.t}</b><span>${x.kn} - ${x.items.length} words</span></div><span class="${d?'done':''}">${d?'✓ Done':'Start ›'}</span></a>`});
+  h+=`</div>`});
+ $('#app').innerHTML=h}
+function pick(p){S.p=p;save();home()}
+function lesson(l,i){const x=LEVELS[l-1].lessons[i];let k=0;
+ function card(){const it=x.items[k];
+  $('#app').innerHTML=`<div class="prog"><i style="width:${100*k/x.items.length}%"></i></div>`+
+  tutorBox(k==0?`Lesson: <b>${x.t}</b>. Listen first, then say it out loud.`:`Good! Next one.`)+
+  `<div class="card"><div class="big">${esc(it.en)}</div><div class="kn">${it.kn}</div><div class="say">${it.say!==it.en?esc(it.say):''}</div>
+  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn sm" id="b1">🔊 Listen ಕೇಳಿ</button><button class="btn sm alt" id="b2">🐢 Slow</button><button class="btn sm alt" id="b3">🎤 Speak ಹೇಳಿ</button></div>
+  <div class="fb" id="fb" style="text-align:center"></div></div>
+  <div class="row"><button class="btn alt" id="pv" ${k?'':'disabled'}>‹ Back</button><button class="btn" id="nx">${k==x.items.length-1?'Start quiz ›':'Next ಮುಂದೆ ›'}</button></div>`;
+  $('#b1').onclick=()=>speak(it.say);$('#b2').onclick=()=>speak(it.say,true);
+  $('#b3').onclick=()=>{const f=$('#fb');f.className='fb';f.textContent='Listening... speak now';
+   listen(it.say,a=>{if(a===null){f.textContent='Speaking check needs Chrome. Say it out loud anyway - you can do it!';return}
+    if(!a.length){f.className='fb bad';f.textContent='I could not hear you. Try again.';return}
+    const sc=Math.max(...a.map(t=>score(it.en,t)),...a.map(t=>score(it.say,t)));
+    if(sc>=80){f.className='fb ok';f.textContent='Great! I heard: "'+a[0]+'" ('+sc+'%)';S.xp+=2;save()}
+    else{f.className='fb bad';f.textContent='I heard: "'+a[0]+'" ('+sc+'%). Listen again and try once more.'}})};
+  $('#pv').onclick=()=>{k--;card()};$('#nx').onclick=()=>{if(k<x.items.length-1){k++;card()}else quiz(l,i)}}
+ card()}
+function quiz(l,i){const x=LEVELS[l-1].lessons[i];const all=[].concat(...LEVELS.flatMap(v=>v.lessons.map(z=>z.items)));
+ const items=shuf(x.items).slice(0,Math.min(8,x.items.length));const qs=[];
+ items.forEach((it,n)=>{const t=n%3;
+  if(t===0){const o=shuf(x.items.filter(z=>z.kn!==it.kn).concat(all.filter(z=>z.kn!==it.kn))).filter((z,j,a)=>a.findIndex(y=>y.kn===z.kn)===j).slice(0,3).map(z=>z.kn);qs.push({q:`What does <b>${esc(it.en)}</b> mean in Kannada?`,o:shuf(o.concat(it.kn)),a:it.kn,listen:it.say})}
+  else if(t===1){const o=shuf(x.items.filter(z=>z.en!==it.en).concat(all.filter(z=>z.en!==it.en))).filter((z,j,a)=>a.findIndex(y=>y.en===z.en)===j).slice(0,3).map(z=>z.en);qs.push({q:`Which English is <b>${it.kn}</b>?`,o:shuf(o.concat(it.en)),a:it.en})}
+  else qs.push({q:`Type in English: <b>${it.kn}</b>`,type:1,a:it.en,hint:it.en.split(' ').map(w=>w[0]+'_'.repeat(Math.max(0,w.length-1))).join(' ')})});
+ let k=0,ok=0;
+ function show(){const q=qs[k];let h=`<div class="prog"><i style="width:${100*k/qs.length}%"></i></div><div class="card"><div class="note">Quiz ${k+1} of ${qs.length}</div><h2 style="margin-top:4px">${q.q}</h2>`;
+  if(q.listen)h+=`<button class="btn sm alt" id="ls">🔊 Listen</button>`;
+  if(q.type)h+=`<div class="note">Hint: ${q.hint}</div><input type="text" id="ti" autocomplete="off" autocapitalize="off" style="margin-top:8px"><button class="btn" id="ck" style="margin-top:10px">Check ಪರಿಶೀಲಿಸಿ</button>`;
+  else q.o.forEach((o,j)=>h+=`<button class="opt" data-j="${j}">${esc(o)}</button>`);
+  h+=`<div class="fb" id="fb"></div><button class="btn" id="nq" style="display:none">Next ಮುಂದೆ ›</button></div>`;$('#app').innerHTML=h;
+  if(q.listen)$('#ls').onclick=()=>speak(q.listen);
+  const fin=good=>{const f=$('#fb');if(good){ok++;S.xp+=5;f.className='fb ok';f.textContent='Correct ಸರಿ! +5 XP'}else{f.className='fb bad';f.textContent='Not correct. Answer: '+q.a}
+   save();const n=$('#nq');n.style.display='inline-block';n.onclick=()=>{k++;k<qs.length?show():end()}};
+  if(q.type){$('#ck').onclick=()=>{$('#ck').disabled=true;$('#ti').disabled=true;fin(norm($('#ti').value)===norm(q.a))};$('#ti').addEventListener('keydown',e=>{if(e.key==='Enter')$('#ck').click()})}
+  else document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const g=q.o[+b.dataset.j]===q.a;document.querySelectorAll('.opt').forEach(z=>{z.disabled=true;if(q.o[+z.dataset.j]===q.a)z.classList.add('ok')});if(!g)b.classList.add('bad');fin(g)})}
+ function end(){const pct=Math.round(100*ok/qs.length);const pass=pct>=60;if(pass){S.done[l+'-'+i]=1;S.xp+=10}touch();save();checkBadges();
+  const nx=LEVELS[l-1].lessons[i+1];
+  $('#app').innerHTML=tutorBox(pass?`Well done! You scored ${pct}%. +10 XP. Come back tomorrow to keep your streak. 🎉`:`You scored ${pct}%. No problem - practice the lesson once more, then try again.`)+
+  `<div class="card"><div class="big">${ok} / ${qs.length}</div><div class="row" style="justify-content:center;margin-top:10px"><a class="btn alt" href="#/lesson/${l}/${i}">Practice again</a>${pass&&nx?`<a class="btn" href="#/lesson/${l}/${i+1}">Next lesson ›</a>`:''}<a class="btn alt" href="#/">All lessons</a></div></div>`;
+  if(pass)speak('Well done!')}
+ show()}
+function ask(){let h=`<h1>Ask the teacher</h1>`+tutorBox(`Write a sentence and I will correct it. Or ask me any English question. Simple words are okay.`)+
+ `<div class="card chat" id="ch"></div><div class="card"><textarea id="q" rows="2" placeholder="Example: I am go to office yesterday"></textarea><div class="row" style="margin-top:8px"><button class="btn" id="go">Send</button><a class="btn alt" href="#/">Back</a></div><div class="note">Answers come from AI and can have mistakes.</div></div>`;
+ $('#app').innerHTML=h;const ch=$('#ch');
+ $('#go').onclick=async()=>{const t=$('#q').value.trim();if(!t)return;$('#q').value='';ch.innerHTML+=`<div class="m u">${esc(t)}</div>`;
+  const w=document.createElement('div');w.className='m t';w.textContent='...';ch.appendChild(w);ch.scrollTop=1e5;
+  try{const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:t,persona:S.p,level:'Beginner'})});const j=await r.json();w.textContent=j.reply;speak(j.reply.slice(0,200))}
+  catch(e){w.textContent='No internet. Please try again.'}ch.scrollTop=1e5}}
+function route(){("speechSynthesis" in window)&&speechSynthesis.cancel();const p=location.hash.replace(/^#\/?/,'').split('/');window.scrollTo(0,0);
+ if(p[0]==='lesson'&&LEVELS[p[1]-1]&&LEVELS[p[1]-1].lessons[p[2]])lesson(+p[1],+p[2]);else if(p[0]==='ask')ask();else home()}
+addEventListener('hashchange',route);hdr();route();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+</script></body></html>
