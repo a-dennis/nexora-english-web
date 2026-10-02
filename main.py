@@ -23,11 +23,11 @@ SYSTEM = ("You are a kind English teacher for Indian learners whose first langua
           "If the learner writes a sentence with mistakes, show the corrected sentence first, then explain the mistake in one or two lines. "
           "Keep answers under 90 words. Only talk about learning English. Never ask for personal details.")
 
-def ask_ai(persona, text, level):
+def ask_ai(persona, text, level, lang='Kannada'):
     key = os.environ.get("GEMINI_API_KEY", "")
     if not key:
         return None
-    body = {"system_instruction": {"parts": [{"text": SYSTEM + " Your name is " + persona + ". Learner level: " + level + "."}]},
+    body = {"system_instruction": {"parts": [{"text": SYSTEM + " Your name is " + persona + ". Learner level: " + level + ". Add the short explanation in " + lang + " script."}]},
             "contents": [{"role": "user", "parts": [{"text": text[:600]}]}]}
     for m in MODELS:
         try:
@@ -90,9 +90,10 @@ class H(BaseHTTPRequestHandler):
             text = str(d.get("text", ""))[:600]
             persona = "Anaya" if d.get("persona") == "Anaya" else "Arjun"
             level = str(d.get("level", "Beginner"))[:20]
+            lang = "Hindi" if d.get("lang") == "hi" else "Kannada"
         except Exception:
             return self.send(400, "application/json", json.dumps({"reply": "Bad request."}))
-        out = ask_ai(persona, text, level)
+        out = ask_ai(persona, text, level, lang)
         if out is None:
             out = "My smart answers are switching on soon. Meanwhile, do the lessons and quizzes."
         elif out == "":
