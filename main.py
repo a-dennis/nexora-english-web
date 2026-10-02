@@ -58,6 +58,12 @@ class H(BaseHTTPRequestHandler):
         self.do_GET()
     def do_GET(self):
         p = self.path.split("?")[0]
+        if p != "/health":
+            self.send_response(302)
+            self.send_header("Location", "https://nexora-web-q7rn.onrender.com/english")
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return
         if p in ("/", "/index.html"):
             with open(os.path.join(BASE, "index.html"), "rb") as f:
                 return self.send(200, "text/html; charset=utf-8", f.read())
